@@ -6,9 +6,13 @@
     ['how', 'how-it-works.html', 'Как это работает'], ['examples', 'examples.html', 'Примеры'],
     ['risks', 'risks.html', 'Риски'], ['quiz', 'quiz.html', 'Проверить себя ↗']
   ];
+  // Re-scan blocks when the quiz renders new content. No input values are attached.
+  function refreshBlockStats() {
+    try { if (typeof window.top100Counter?.sendBlocks === 'function') window.top100Counter.sendBlocks(); } catch { /* Analytics must not interrupt site interactions. */ }
+  }
   const page = document.body.dataset.page;
-  const brand = '<a class="brand" href="index.html" aria-label="ЦФА Навигатор - главная"><img src="assets/favicon.svg" width="35" height="35" alt=""><div class="brand-name">ЦФА<span>навигатор</span><small>ПОНЯТНЫЙ ГИД ПО ЦИФРОВЫМ АКТИВАМ</small></div></a>';
-  document.querySelector('#site-header').innerHTML = `<div class="wrap header-inner">${brand}<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Меню ☰</button><nav class="site-nav" id="main-nav" aria-label="Основная навигация">${pages.map(([key, href, name]) => `<a href="${href}"${key === page ? ' aria-current="page"' : ''}${key === 'quiz' ? ' class="nav-test"' : ''}>${name}</a>`).join('')}</nav></div>`;
+  const brand = '<a class="brand" href="index.html" data-cfa-block="brand" aria-label="ЦФА Навигатор - главная"><img src="assets/favicon.svg" width="35" height="35" alt=""><div class="brand-name">ЦФА<span>навигатор</span><small>ПОНЯТНЫЙ ГИД ПО ЦИФРОВЫМ АКТИВАМ</small></div></a>';
+  document.querySelector('#site-header').innerHTML = `<div class="wrap header-inner" data-cfa-block="header">${brand}<button class="menu-toggle" type="button" data-cfa-block="mobile-menu" aria-expanded="false" aria-controls="main-nav">Меню ☰</button><nav class="site-nav" id="main-nav" data-cfa-block="navigation" aria-label="Основная навигация">${pages.map(([key, href, name]) => `<a href="${href}" data-cfa-block="${key}"${key === page ? ' aria-current="page"' : ''}${key === 'quiz' ? ' class="nav-test"' : ''}>${name}</a>`).join('')}</nav></div>`;
   const config = window.CFA_CONFIG || {};
   const metrikaId = /^\d+$/.test(String(config.yandexMetrikaId || '')) ? String(config.yandexMetrikaId) : '';
   const gaId = /^G-[A-Z0-9]+$/.test(String(config.googleAnalyticsId || '')) ? String(config.googleAnalyticsId) : '';
@@ -18,19 +22,19 @@
     ? 'С вашего разрешения используются ' + analyticsServices + ' для статистики посещений и действий: переходов, использования инструментов и результатов теста. Введённые в калькулятор значения счётчикам не передаются. Изменить выбор для этих дополнительных сервисов можно кнопкой «Настройки аналитики».'
     : '';
   document.querySelector('#site-footer').innerHTML = `
-    <div class="wrap footer-main">
+    <div class="wrap footer-main" data-cfa-block="footer">
       <div>${brand}<p>Справочные материалы о цифровых финансовых активах: основы, механизм работы, примеры и риски.</p></div>
-      <div><h3>Разделы</h3><nav class="footer-links" aria-label="Разделы в подвале">${pages.slice(1).map(([, href, name]) => `<a href="${href}">${name.replace(' ↗', '')}</a>`).join('')}<a href="basics.html#sources">Источники ↗</a></nav></div>
+      <div><h3>Разделы</h3><nav class="footer-links" aria-label="Разделы в подвале">${pages.slice(1).map(([key, href, name]) => `<a href="${href}" data-cfa-block="${key}">${name.replace(' ↗', '')}</a>`).join('')}<a href="basics.html#sources" data-cfa-block="sources">Источники ↗</a></nav></div>
       <div><h3>О проекте</h3>
         <p>Учебный сайт о ЦФА, созданный для изучения веб-аналитики.</p>
         <p>Примеры выпусков вымышлены. Материалы носят информационный характер и не являются индивидуальной инвестиционной рекомендацией.</p>
-        <details class="privacy-details" id="privacy"><summary>Данные и аналитика</summary>
+        <details class="privacy-details" id="privacy" data-cfa-block="privacy"><summary>Данные и аналитика</summary>
           <p>Отметки чек-листа и выбор настроек аналитики сохраняются в этом браузере, если локальное хранение доступно. Тест и калькулятор работают в браузере; результат теста не сохраняется после перезагрузки страницы.</p>
-          <p>На всех страницах установлен счётчик LiveInternet. Он загружается при открытии страницы и передаёт сервису адрес и название страницы, источник перехода, параметры экрана и технические данные запроса. Сервис может использовать cookies для учёта посещений.</p>
+          <p>На всех страницах установлены LiveInternet и «Статистика от Sber Ads» (Топ-100). Счётчики загружаются при открытии страницы и собирают статистику посещений и технические данные: адрес страницы, источник перехода, сведения о браузере и устройстве. Sber Ads также учитывает показы и клики по размеченным блокам. Сервисы могут использовать cookies. Для блоков используются названия и номера элементов интерфейса. Введённые в калькулятор значения в разметку не включаются.</p>
           ${hasCounters ? `<p>${analyticsDescription}</p>` : ''}
-          ${hasCounters ? '<p>При разрешённой аналитике сервисы могут использовать cookies и получать технические данные посещения. Отзыв разрешения останавливает дальнейшую загрузку этих дополнительных счётчиков и не отключает LiveInternet; ранее сохранённые cookies можно удалить в настройках браузера.</p><p>Условия сервисов: ' + [metrikaId ? '<a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">Яндекс</a>' : '', gaId ? '<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a>' : ''].filter(Boolean).join(', ') + '.</p>' : ''}
+          ${hasCounters ? '<p>При разрешённой аналитике сервисы могут использовать cookies и получать технические данные посещения. Отзыв разрешения останавливает дальнейшую загрузку этих дополнительных счётчиков и не отключает LiveInternet и Sber Ads; ранее сохранённые cookies можно удалить в настройках браузера.</p><p>Условия сервисов: ' + [metrikaId ? '<a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">Яндекс</a>' : '', gaId ? '<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a>' : ''].filter(Boolean).join(', ') + '.</p>' : ''}
         </details>
-        <button class="text-button" type="button" id="analytics-settings"${hasCounters ? '' : ' hidden'}>Настройки дополнительных счётчиков</button>
+        <button class="text-button" type="button" id="analytics-settings" data-cfa-block="analytics-settings"${hasCounters ? '' : ' hidden'}>Настройки дополнительных счётчиков</button>
       </div>
     </div>
     <div class="wrap footer-bottom"><span>© 2026 Kirill Zaytsev · ЦФА Навигатор</span></div>`;
@@ -194,6 +198,8 @@
     const submit = document.querySelector('#quiz-submit');
     const feedback = document.querySelector('#quiz-feedback');
     function renderQuestion() {
+      form.querySelector('fieldset').setAttribute('data-cfa-block', 'question-' + (index + 1));
+      submit.setAttribute('data-cfa-block', 'check-answer');
       checked = false;
       feedback.hidden = true;
       submit.textContent = 'Ответить';
@@ -202,8 +208,9 @@
       document.querySelector('#quiz-score').textContent = `Верно: ${score}`;
       document.querySelector('#quiz-bar').style.width = `${index / questions.length * 100}%`;
       document.querySelector('#question-title').textContent = question.title;
-      document.querySelector('#quiz-options').innerHTML = question.options.map((option, i) => `<label class="quiz-option"><input type="radio" name="answer" value="${i}" required><span>${option}</span></label>`).join('');
+      document.querySelector('#quiz-options').innerHTML = question.options.map((option, i) => `<label class="quiz-option" data-cfa-block="answer-${i + 1}"><input type="radio" name="answer" value="${i}" required><span>${option}</span></label>`).join('');
       document.querySelector('#question-title').focus({ preventScroll: true });
+      refreshBlockStats();
     }
     function begin() {
       index = 0; score = 0; answers = [];
@@ -220,7 +227,8 @@
         active.hidden = true; result.hidden = false;
         document.querySelector('#result-title').textContent = `${score} из ${questions.length} - ${score === questions.length ? 'отличная работа!' : score >= 4 ? 'хороший результат!' : 'начало положено!'}`;
         document.querySelector('#result-description').textContent = score === questions.length ? 'Основные понятия уже знакомы. Продолжайте изучение по первоисточникам и помните об условиях каждого выпуска.' : 'Посмотрите пояснения ниже. Ссылки помогут вернуться к темам, которые стоит повторить.';
-        document.querySelector('#result-review').innerHTML = questions.map((q, i) => `<details><summary>${answers[i] === q.correct ? '✓' : '○'} ${i + 1}. ${q.title}</summary><p>Ваш ответ: ${q.options[answers[i]]}</p><p><strong>Правильный ответ:</strong> ${q.options[q.correct]}</p><p>${q.explanation} <a href="${q.link}">Повторить: ${q.topic} →</a></p></details>`).join('');
+        document.querySelector('#result-review').innerHTML = questions.map((q, i) => `<details data-cfa-block="review-${i + 1}"><summary>${answers[i] === q.correct ? '✓' : '○'} ${i + 1}. ${q.title}</summary><p>Ваш ответ: ${q.options[answers[i]]}</p><p><strong>Правильный ответ:</strong> ${q.options[q.correct]}</p><p>${q.explanation} <a href="${q.link}">Повторить: ${q.topic} →</a></p></details>`).join('');
+        refreshBlockStats();
         track('quiz_complete', { score, total: questions.length });
         result.focus({ preventScroll: true });
         result.scrollIntoView({ block: 'nearest', behavior: 'instant' });
@@ -240,7 +248,10 @@
       feedback.hidden = false;
       submit.textContent = index === questions.length - 1 ? 'Посмотреть результат →' : 'Следующий вопрос →';
       checked = true;
+      submit.setAttribute('data-cfa-block', index === questions.length - 1 ? 'show-result' : 'next-question');
+      refreshBlockStats();
       track('quiz_answer', { question: index + 1, correct });
     });
   }
+  refreshBlockStats();
 })();
