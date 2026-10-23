@@ -38,7 +38,7 @@
     <section class="wrap"><div class="editorial-banner"><span class="eyebrow">ОДНА ВАЖНАЯ МЫСЛЬ</span><h2>Цифровой - это форма.<br><span class="serif">Содержание - это права.</span></h2><p>Чтобы понять конкретный актив, начните с вопроса: что именно и на каких условиях вправе получить его обладатель?</p><a class="button light" href="basics.html#comparison" data-cfa-block="link-basics-comparison">Разобраться в отличиях <span>↗</span></a><span class="banner-mark" aria-hidden="true">✳</span></div></section>
     <section class="section wrap faq-section"><div><span class="eyebrow">КОРОТКО О ГЛАВНОМ</span><h2>Вопросы о ЦФА</h2><a class="text-link" href="basics.html#sources" data-cfa-block="link-basics-sources">Открыть источники ↗</a></div><div class="faq-list"><details data-cfa-block="details-1"><summary>ЦФА - это криптовалюта?</summary><p>Это разные понятия. ЦФА удостоверяют предусмотренные решением о выпуске права. Нельзя переносить свойства отдельной криптовалюты на все цифровые активы.</p></details><details data-cfa-block="details-2"><summary>Можно ли оплачивать покупки ЦФА?</summary><p>ЦФА не являются средством платежа. Их назначение связано с закреплёнными в них правами.</p></details><details data-cfa-block="details-3"><summary>Здесь можно купить активы?</summary><p>Нет. Сайт содержит справочные материалы и учебные примеры. Покупка и продажа активов здесь недоступны.</p></details></div></section>
   </main><footer id="site-footer"></footer>
-<div class="counter-strip"><div class="wrap visitor-counter" aria-label="Статистика посещений LiveInternet">
+<div class="counter-strip"><div class="wrap visitor-counter" aria-label="Счётчики посещаемости">
 <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
 target="_blank"><img id="licnt7038" width="88" height="31" style="border:0" 
 title="LiveInternet: показано число просмотров и посетителей за 24 часа"
@@ -49,6 +49,7 @@ alt=""/></a><script>(function(d,s){d.getElementById("licnt7038").src=
 (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
 ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
 (document,screen)</script><!--/LiveInternet-->
+<div id="top100_widget" aria-label="Статистика от Sber Ads"></div>
 </div></div>
 <!-- Top100 (Kraken) Counter -->
 <script>
@@ -59,9 +60,11 @@ alt=""/></a><script>(function(d,s){d.getElementById("licnt7038").src=
             attributes_dataset: [ "cfa-block" ],
             trackHashes: true,
             user_id: null,
+            widgetColor: "009ce0",
         };
         try {
             w.top100Counter = new top100(options);
+            w.top100Counter.drawLogoTo("top100_widget");
         } catch(e) { }
     });
     var n = d.getElementsByTagName("script")[0],

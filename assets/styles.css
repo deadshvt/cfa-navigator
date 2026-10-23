@@ -20,3 +20,5 @@
 @media(max-width:620px){.header-inner>.brand{max-width:calc(100% - 70px);gap:8px}.header-inner .brand img{width:30px;height:30px}.header-inner .brand-name{font-size:17px}.header-inner .brand small{font-size:6.5px;letter-spacing:.035em;white-space:nowrap}.menu-toggle{padding:7px 9px;font-size:12px}}
 
 .counter-strip{background:#eef1f6}.visitor-counter{padding-block:0 22px;display:flex;align-items:center}.visitor-counter a{display:inline-flex;line-height:0}.visitor-counter img{display:block;width:88px;height:31px}
+
+.visitor-counter{gap:16px;flex-wrap:wrap}#top100_widget{display:inline-flex;align-items:center;min-height:31px}#top100_widget img{width:auto;height:auto}

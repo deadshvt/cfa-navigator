@@ -4,7 +4,7 @@
 <section class="section"><span class="eyebrow">ЖИЗНЕННЫЙ ЦИКЛ</span><h2>Четыре шага одного выпуска</h2><div class="timeline"><article><span class="timeline-num">01</span><div><span class="tag">ДО ПРИОБРЕТЕНИЯ</span><h3>Условия фиксируются в документах</h3><p>В решении о выпуске определяются права и обязательства. На этом этапе важно понять срок, порядок расчёта выплат и возможные ограничения.</p></div></article><article><span class="timeline-num">02</span><div><span class="tag">ВЫПУСК</span><h3>Появляется запись о первом обладателе</h3><p>Права по ЦФА возникают при внесении в систему записи о зачислении актива первому обладателю.</p></div></article><article><span class="timeline-num">03</span><div><span class="tag">ОБРАЩЕНИЕ</span><h3>Актив учитывается в системе</h3><p>Возможность и порядок передачи зависят от правил и условий. Наличие цифровой записи не означает, что покупатель для перепродажи найдётся в любой момент.</p></div></article><article><span class="timeline-num">04</span><div><span class="tag">ИСПОЛНЕНИЕ</span><h3>Наступает предусмотренный срок</h3><p>Для нашего примера это срок денежной выплаты. Если обязательство не исполнено, цифровой формат сам по себе не устраняет проблему.</p></div></article></div></section>
 <aside class="callout"><span class="callout-icon">↔</span><div><h3>Автоматизация - не гарантия исполнения</h3><p>Технология помогает организовать учёт и операции, но её нужно рассматривать отдельно от способности обязанного лица выполнить обещанное.</p></div></aside>
 <p class="caption">Основа раздела: <a href="https://www.cbr.ru/finm_infrastructure/digital_oper/" target="_blank" rel="noopener noreferrer" data-cfa-block="link-www-cbr-ru-finm-infrastructure-digital-oper">ЦФА и их операторы</a>, <a href="https://www.cbr.ru/faq/tsfa/" target="_blank" rel="noopener noreferrer" data-cfa-block="link-www-cbr-ru-faq-tsfa">разъяснения Банка России</a>.</p>
-<nav class="next-page" aria-label="Следующий раздел"><div><small>ДАЛЬШЕ / 03</small><h2>Перейдём к примерам?</h2></div><a class="button" href="examples.html" data-cfa-block="link-examples">Изучить выпуски ↗</a></nav></main><footer id="site-footer"></footer><div class="counter-strip"><div class="wrap visitor-counter" aria-label="Статистика посещений LiveInternet">
+<nav class="next-page" aria-label="Следующий раздел"><div><small>ДАЛЬШЕ / 03</small><h2>Перейдём к примерам?</h2></div><a class="button" href="examples.html" data-cfa-block="link-examples">Изучить выпуски ↗</a></nav></main><footer id="site-footer"></footer><div class="counter-strip"><div class="wrap visitor-counter" aria-label="Счётчики посещаемости">
 <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
 target="_blank"><img id="licnt7038" width="88" height="31" style="border:0" 
 title="LiveInternet: показано число просмотров и посетителей за 24 часа"
@@ -15,6 +15,7 @@ alt=""/></a><script>(function(d,s){d.getElementById("licnt7038").src=
 (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
 ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
 (document,screen)</script><!--/LiveInternet-->
+<div id="top100_widget" aria-label="Статистика от Sber Ads"></div>
 </div></div>
 <!-- Top100 (Kraken) Counter -->
 <script>
@@ -25,9 +26,11 @@ alt=""/></a><script>(function(d,s){d.getElementById("licnt7038").src=
             attributes_dataset: [ "cfa-block" ],
             trackHashes: true,
             user_id: null,
+            widgetColor: "009ce0",
         };
         try {
             w.top100Counter = new top100(options);
+            w.top100Counter.drawLogoTo("top100_widget");
         } catch(e) { }
     });
     var n = d.getElementsByTagName("script")[0],
