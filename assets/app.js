@@ -15,8 +15,8 @@
   const hasCounters = Boolean(metrikaId || gaId);
   const analyticsServices = [metrikaId ? 'Яндекс Метрика' : '', gaId ? 'Google Analytics' : ''].filter(Boolean).join(' и ');
   const analyticsDescription = hasCounters
-    ? 'С вашего разрешения используются ' + analyticsServices + ' для статистики посещений и действий: переходов, использования инструментов и результатов теста. Введённые в калькулятор значения счётчикам не передаются. Изменить выбор можно кнопкой «Настройки аналитики».'
-    : 'Счётчики аналитики пока не подключены. Сайт не отправляет события посещений и действий в сервисы аналитики.';
+    ? 'С вашего разрешения используются ' + analyticsServices + ' для статистики посещений и действий: переходов, использования инструментов и результатов теста. Введённые в калькулятор значения счётчикам не передаются. Изменить выбор для этих дополнительных сервисов можно кнопкой «Настройки аналитики».'
+    : '';
   document.querySelector('#site-footer').innerHTML = `
     <div class="wrap footer-main">
       <div>${brand}<p>Справочные материалы о цифровых финансовых активах: основы, механизм работы, примеры и риски.</p></div>
@@ -26,10 +26,11 @@
         <p>Примеры выпусков вымышлены. Материалы носят информационный характер и не являются индивидуальной инвестиционной рекомендацией.</p>
         <details class="privacy-details" id="privacy"><summary>Данные и аналитика</summary>
           <p>Отметки чек-листа и выбор настроек аналитики сохраняются в этом браузере, если локальное хранение доступно. Тест и калькулятор работают в браузере; результат теста не сохраняется после перезагрузки страницы.</p>
-          <p>${analyticsDescription}</p>
-          ${hasCounters ? '<p>При разрешённой аналитике сервисы могут использовать cookies и получать технические данные посещения. Отзыв разрешения останавливает дальнейшую загрузку счётчиков; ранее сохранённые cookies можно удалить в настройках браузера.</p><p>Условия сервисов: ' + [metrikaId ? '<a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">Яндекс</a>' : '', gaId ? '<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a>' : ''].filter(Boolean).join(', ') + '.</p>' : ''}
+          <p>На всех страницах установлен счётчик LiveInternet. Он загружается при открытии страницы и передаёт сервису адрес и название страницы, источник перехода, параметры экрана и технические данные запроса. Сервис может использовать cookies для учёта посещений.</p>
+          ${hasCounters ? `<p>${analyticsDescription}</p>` : ''}
+          ${hasCounters ? '<p>При разрешённой аналитике сервисы могут использовать cookies и получать технические данные посещения. Отзыв разрешения останавливает дальнейшую загрузку этих дополнительных счётчиков и не отключает LiveInternet; ранее сохранённые cookies можно удалить в настройках браузера.</p><p>Условия сервисов: ' + [metrikaId ? '<a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener noreferrer">Яндекс</a>' : '', gaId ? '<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a>' : ''].filter(Boolean).join(', ') + '.</p>' : ''}
         </details>
-        <button class="text-button" type="button" id="analytics-settings"${hasCounters ? '' : ' hidden'}>Настройки аналитики</button>
+        <button class="text-button" type="button" id="analytics-settings"${hasCounters ? '' : ' hidden'}>Настройки дополнительных счётчиков</button>
       </div>
     </div>
     <div class="wrap footer-bottom"><span>© 2026 Kirill Zaytsev · ЦФА Навигатор</span></div>`;
